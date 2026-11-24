@@ -6,8 +6,8 @@ let db=load(),page='dashboard';
 function load(){try{const raw=JSON.parse(localStorage.getItem(KEY)||'{}');const base=blank();return {...base,...raw,profile:{...base.profile,...(raw.profile||{})},settings:{...base.settings,...(raw.settings||{})},...Object.fromEntries(['subjects','schedule','tasks','exams','grades','attendance','notes','events','agenda','quiz','wallet','mbg','rpl','barcodes'].map(k=>[k,Array.isArray(raw[k])?raw[k]:[]]))}}catch{return blank()}}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(db));return true}catch(e){toast('Penyimpanan penuh atau tidak tersedia. Ekspor cadangan datamu.');return false}}
 function uid(){return crypto.randomUUID?crypto.randomUUID():Date.now().toString(36)+Math.random().toString(36).slice(2)}
-function today(){const d=new Date();return [d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getTanggal()).padStart(2,'0')].join('-')}
-function fmt(d){if(!d)return '—';return new Tanggal(d+'T00:00:00').toLocaleDateString('id-ID',{day:'numeric',month:'short',year:'numeric'})}
+function today(){const d=new Date();return [d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-')}
+function fmt(d){if(!d)return '—';return new Date(d+'T00:00:00').toLocaleDateString('id-ID',{day:'numeric',month:'short',year:'numeric'})}
 function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200)}
 const config={
 subjects:{title:'Mata Pelajaran',desc:'Kelola daftar mata pelajaran pribadi.',fields:[['name','Nama mata pelajaran','text',true],['teacher','Guru','text'],['room','Ruang / Laboratorium','text'],['color','Warna aksen','select',['Sian','Ungu','Jingga','Biru']]]},
