@@ -28,7 +28,7 @@ barcodes:{title:'Koleksi Kode Batang',desc:'Simpan label dan isi kode untuk refe
 function subjectOptions(){return db.subjects.map(s=>'<option value="'+esc(s.name)+'">'+esc(s.name)+'</option>').join('')}
 function fieldHTML(f,values={}){const [key,label,type,reqOrOptions,optsArg]=f;const req=typeof reqOrOptions==='boolean'?reqOrOptions:false;const opts=Array.isArray(reqOrOptions)?reqOrOptions:(Array.isArray(optsArg)?optsArg:[]);const val=values[key]??'';let input='';
 if(type==='textarea')input='<textarea name="'+key+'" '+(req?'required':'')+'>'+esc(val)+'</textarea>';
-else if(type==='subject')input='<select name="'+key+'"><option value="">Pilih mata pelajaran</option>'+subjectOptions().replace('value="'+esc(val)+'"','value="'+esc(val)+'" selected')+'</select>';
+else if(type==='subject')input='<select name="'+key+'" '+(req?'required':'')+'><option value="">Pilih mata pelajaran</option>'+subjectOptions().replace('value="'+esc(val)+'"','value="'+esc(val)+'" selected')+'</select>';
 else if(type==='select')input='<select name="'+key+'" '+(req?'required':'')+'><option value="">Pilih…</option>'+opts.map(o=>'<option '+(o===val?'selected':'')+'>'+esc(o)+'</option>').join('')+'</select>';
 else input='<input name="'+key+'" type="'+type+'" value="'+esc(val)+'" '+(req?'required':'')+(type==='number'?' min="0" step="any"':'')+'>';
 return '<div class="field"><label>'+esc(label.toUpperCase())+(req?' *':'')+'</label>'+input+'</div>'}
