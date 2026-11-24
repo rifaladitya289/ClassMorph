@@ -1,39 +1,37 @@
 # Classora — Personal Academic OS
 
-A personal, offline-first school organizer with a sci-fi / neon HUD interface.
+Classora is a personal school organizer with a neon HUD interface. It runs as an installable PWA and has an Android WebView wrapper.
 
-## Current features
-- Dashboard with today's timetable, pending tasks, upcoming events and grade average
-- Personal subjects library
-- Weekly timetable
+## Included modules
+- Dashboard and weekly timetable
+- Subjects and teacher/room details
 - Assignments with due dates, priority and completion status
 - Exams and school events
-- Grade records with score validation and average calculation
+- Grade records and percentage average
 - Personal attendance log
 - Study notes
-- Academic calendar
-- Progress overview
+- Academic calendar and progress overview
 - Profile and academic-year settings
+- Add, edit, delete and complete records
 - JSON backup and restore
-- PWA manifest and service worker for offline shell caching
+- Offline app-shell caching for the PWA
+- Android APK build workflow
 
-## Run locally
-Open `index.html` in a local web server. For PWA installation and service-worker support, serve over HTTPS (GitHub Pages works) or localhost.
+## Run as a PWA
+Open the GitHub Pages site over HTTPS, then use your browser's install/add-to-home-screen option. The app shell is cached for offline reopening after the first successful load.
 
-## Data & privacy
-Classora stores records in browser localStorage on the current device. There is no account, cloud sync, or server database. PWA and Android WebView storage are separate. Export JSON backups regularly.
+## Data and privacy
+Records are stored locally on the current browser or Android WebView using localStorage. There is no account, cloud sync or server database. PWA and APK data stores are separate. Export a JSON backup regularly; clearing app/browser storage can erase local records.
 
 ## Android APK
-The web app is designed to be wrapped in an Android WebView. APK packaging is a separate build step and is not included in this first web foundation.
+The Android WebView wrapper is in `android/`. A debug APK is built by GitHub Actions when app or Android source files change on `development`. Open the repository's Actions tab, select the latest successful **Build Classora APK** run, and download the `Classora-debug-apk` artifact. This is a debug build, not a Play Store release.
 
-## Roadmap
-- IndexedDB migration
-- Timetable day/time conflict detection
-- Editing existing records
-- Local notification scheduling
-- More detailed grade weighting and semester reports
-- Android WebView wrapper and APK build workflow
-- Automated browser tests
+## Known limitations
+- Data remains on one device; there is no cloud sync.
+- Notifications are not implemented.
+- Data is stored in localStorage rather than IndexedDB.
+- No automated browser interaction suite is included yet.
+- Test the app on your own device and keep a backup before clearing browser/app data.
 
 ## Branches
-Work is maintained in `development`; `main` remains untouched until release approval.
+Development work is kept on `development`; `main` remains untouched.
